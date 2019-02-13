@@ -24,31 +24,31 @@ function run {
 }
 
 (   cat preamble.md
-    echo '<table>'
-        echo '<tr>'
-            echo '<th>YAML source</th>'
-            echo '<th>yaml2json.hs</th>'
-            echo '<th>yaml2json.pl</th>'
-            echo '<th>yaml2json.py</th>'
-            echo '<th>yaml2json.rb</th>'
-            echo '<th>rq</th>'
-        echo '</tr>'
         for input in inputs/*.yaml; do
+        echo '<table>'
             echo '<tr>'
-                echo '<td>'
+                echo '<th>Source</th>'
+                echo '<th>Value</th>'
+            echo '</tr><tr>'
+                echo '<td>YAML source</td><td>'
                     run '' cat $input
-                echo '</td><td>'
+                echo '</td></tr><tr>'
+                    echo '<td>yaml2json.hs</td><td>'
                     run haskell ./yaml2json.hs $input
-                echo '</td><td>'
+                echo '</td></tr><tr>'
+                    echo '<td>yaml2json.pl</td><td>'
                     run perl ./yaml2json.pl $input
-                echo '</td><td>'
+                echo '</td></tr><tr>'
+                    echo '<td>yaml2json.py</td><td>'
                     run python ./yaml2json.py $input
-                echo '</td><td>'
+                echo '</td></tr><tr>'
+                    echo '<td>yaml2json.rb</td><td>'
                     run ruby ./yaml2json.rb $input
-                echo '</td><td>'
+                echo '</td></tr><tr>'
+                    echo '<td>rq</td><td>'
                     run '' 'rq -y -J --format compact' $input
                 echo '</td>'
             echo '</tr>'
+            echo '</table>'
         done
-    echo '</table>'
 ) > README.md
