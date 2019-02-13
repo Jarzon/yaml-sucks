@@ -46,6 +46,9 @@ function run {
                 echo '</td><td>'
                     run ruby ./yaml2json.rb $input
                 echo '</td><td>'
+                    echo '<td>yaml2json.php</td><td>'
+                    run php ./yaml2json.php $input
+                echo '</td></tr><tr>'
                     run '' 'rq -y -J --format compact' $input
                 echo '</td>'
             echo '</tr>'
